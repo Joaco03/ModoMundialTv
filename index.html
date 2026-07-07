@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modo Mundial TV — Cientos de canales por $12.000/mes</title>
+<meta name="description" content="Mirá cientos de canales, deportes, películas y series por $12.000 al mes. Sin contratos, sin instalaciones complicadas. Activación por WhatsApp en minutos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --carbon:#151814;
+    --carbon-2:#1d211b;
+    --carbon-3:#262b23;
+    --lima:#c8f542;
+    --blanco:#f4f7ee;
+    --gris:#9aa392;
+    --linea:#2f352c;
+    --wa:#25d366;
+    --radius:16px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--carbon);
+    color:var(--blanco);
+    font-family:'Archivo',system-ui,sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    padding-bottom:90px; /* espacio para el CTA fijo */
+  }
+  .wrap{max-width:1020px;margin:0 auto;padding:0 22px}
+  section{padding:76px 0;border-bottom:1px solid var(--linea)}
+  h2{
+    font-family:'Anton',sans-serif;
+    font-size:clamp(28px,4.5vw,42px);
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    line-height:1.15;
+    margin-bottom:14px;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+    color:var(--lima);margin-bottom:14px;
+  }
+  .eyebrow::before{content:"";width:22px;height:2px;background:var(--lima)}
+  p.lead{color:var(--gris);max-width:560px}
+
+  /* ===== CTA ===== */
+  .cta{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    background:var(--lima);color:var(--carbon);
+    font-weight:800;font-size:18px;
+    padding:18px 34px;border-radius:999px;text-decoration:none;
+    transition:transform .15s ease, box-shadow .3s ease;
+  }
+  .cta:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(200,245,66,.35)}
+  .cta:focus-visible{outline:3px solid var(--blanco);outline-offset:3px}
+  .cta svg{flex-shrink:0}
+  .cta-nota{display:block;margin-top:12px;font-size:13.5px;color:var(--gris)}
+
+  /* ===== CTA FIJO (acompaña toda la página) ===== */
+  .cta-fijo{
+    position:fixed;left:0;right:0;bottom:0;z-index:99;
+    display:flex;justify-content:center;
+    padding:14px 18px calc(14px + env(safe-area-inset-bottom));
+    background:linear-gradient(to top, rgba(10,12,9,.92) 60%, transparent);
+    transform:translateY(110%);
+    transition:transform .35s ease;
+    pointer-events:none;
+  }
+  .cta-fijo.visible{transform:translateY(0);pointer-events:auto}
+  .cta-fijo .cta{
+    width:100%;max-width:440px;font-size:17px;padding:16px 28px;
+    box-shadow:0 10px 34px rgba(0,0,0,.5);
+  }
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;overflow:hidden;
+    padding:110px 0 100px;border-bottom:1px solid var(--linea);
+  }
+  .hero .fondo{
+    position:absolute;inset:0;
+    background:url('img/hero-estadio.jpg') center/cover no-repeat;
+    filter:grayscale(35%);
+  }
+  .hero .velo{
+    position:absolute;inset:0;
+    background:linear-gradient(105deg, rgba(15,17,13,.96) 35%, rgba(15,17,13,.78) 65%, rgba(15,17,13,.55));
+  }
+  .hero .wrap{position:relative;z-index:2}
+  .badge-vivo{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(21,24,20,.75);border:1px solid var(--linea);
+    padding:7px 16px;border-radius:999px;backdrop-filter:blur(4px);
+    font-size:12.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+    color:var(--lima);margin-bottom:26px;
+  }
+  .dot{
+    width:9px;height:9px;border-radius:50%;background:var(--lima);
+    animation:pulso 1.6s ease-in-out infinite;
+  }
+  @keyframes pulso{
+    0%,100%{box-shadow:0 0 0 0 rgba(200,245,66,.6)}
+    50%{box-shadow:0 0 0 7px rgba(200,245,66,0)}
+  }
+  .hero h1{
+    font-family:'Anton',sans-serif;
+    font-size:clamp(40px,7.5vw,76px);
+    line-height:1.04;text-transform:uppercase;letter-spacing:.5px;
+    max-width:820px;
+  }
+  .hero h1 em{font-style:normal;color:var(--lima)}
+  .hero .sub{
+    margin-top:22px;font-size:clamp(18px,2.4vw,22px);
+    color:#c9d1c0;max-width:600px;
+  }
+  .hero .sub strong{color:var(--blanco)}
+  .precio-tag{color:var(--lima);font-weight:800;white-space:nowrap}
+  .hero .cta-row{margin-top:36px}
+
+  /* ===== GRILLA CANALES (placas con foto) ===== */
+  .grid-canales{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));
+    gap:14px;margin-top:38px;
+  }
+  .canal{
+    position:relative;min-height:170px;border-radius:var(--radius);overflow:hidden;
+    display:flex;align-items:flex-end;
+    border:1px solid var(--linea);
+    transition:transform .2s ease, border-color .2s ease;
+    isolation:isolate;
+  }
+  .canal:hover{transform:translateY(-4px);border-color:var(--lima)}
+  .canal .foto{
+    position:absolute;inset:0;background-size:cover;background-position:center;
+    transition:transform .4s ease;z-index:-2;
+  }
+  .canal:hover .foto{transform:scale(1.06)}
+  .canal::after{
+    content:"";position:absolute;inset:0;z-index:-1;
+    background:linear-gradient(to top, rgba(13,15,11,.94) 15%, rgba(13,15,11,.35) 55%, rgba(13,15,11,.15));
+  }
+  .canal .info{padding:16px 18px}
+  .canal .nom{
+    font-family:'Anton',sans-serif;font-size:19px;letter-spacing:.5px;
+    text-transform:uppercase;line-height:1.1;
+  }
+  .canal .cat{
+    display:block;font-size:11.5px;letter-spacing:2px;text-transform:uppercase;
+    color:var(--lima);font-weight:700;margin-top:4px;
+  }
+  .canal.destacada{grid-column:span 2}
+  @media (max-width:560px){.canal.destacada{grid-column:span 1}}
+
+  /* Placa Automovilismo: diseño propio (bandera a cuadros + líneas de velocidad) */
+  .foto-racing{
+    background:
+      repeating-linear-gradient(100deg, transparent 0 42px, rgba(200,245,66,.22) 42px 45px, transparent 45px 60px),
+      linear-gradient(120deg, #262b21 0%, #171a13 55%, #0e100a 100%);
+  }
+  .foto-racing::before{
+    content:"";position:absolute;left:0;right:0;top:0;height:24px;
+    background:conic-gradient(#dfe4d3 90deg, #12150e 90deg 180deg, #dfe4d3 180deg 270deg, #12150e 270deg) 0 0/24px 24px;
+    opacity:.85;
+  }
+  .foto-racing::after{
+    content:"";position:absolute;right:-30px;bottom:18px;width:150px;height:52px;
+    border-radius:999px;
+    background:radial-gradient(ellipse at 30% 50%, rgba(200,245,66,.35), transparent 70%);
+    filter:blur(6px);
+  }
+
+  .nota-logos{
+    margin-top:24px;font-size:13.5px;color:var(--gris);
+    border-left:3px solid var(--lima);padding-left:14px;max-width:640px;
+  }
+
+  /* ===== DISPOSITIVOS ===== */
+  .grid-disp{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:36px}
+  .disp{
+    background:var(--carbon-2);border:1px solid var(--linea);border-radius:var(--radius);
+    padding:32px 26px;text-align:center;
+  }
+  .disp .ico{
+    width:58px;height:58px;margin:0 auto 16px;border-radius:14px;
+    background:var(--carbon-3);display:flex;align-items:center;justify-content:center;
+  }
+  .disp .ico svg{stroke:var(--lima)}
+  .disp h3{font-family:'Anton',sans-serif;font-size:20px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px}
+  .disp p{font-size:15px;color:var(--gris)}
+  .aviso-box{
+    margin-top:24px;background:var(--carbon-2);border:1px dashed var(--lima);
+    border-radius:var(--radius);padding:18px 22px;font-size:15.5px;
+  }
+
+  /* ===== 3 DISPOSITIVOS ===== */
+  .multi{
+    display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center;
+  }
+  @media (max-width:760px){.multi{grid-template-columns:1fr}}
+  .multi .num{
+    font-family:'Anton',sans-serif;font-size:clamp(80px,11vw,130px);
+    color:var(--lima);line-height:1;display:block;margin-bottom:8px;
+  }
+  .multi .foto{
+    border-radius:var(--radius);overflow:hidden;border:1px solid var(--linea);
+    aspect-ratio:4/3;
+  }
+  .multi .foto img{width:100%;height:100%;object-fit:cover;display:block}
+
+  /* ===== PASOS ===== */
+  .pasos{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:36px;counter-reset:paso}
+  .paso{
+    background:var(--carbon-2);border:1px solid var(--linea);border-radius:var(--radius);
+    padding:26px 22px;counter-increment:paso;
+  }
+  .paso::before{
+    content:counter(paso,decimal-leading-zero);
+    font-family:'Anton',sans-serif;font-size:15px;color:var(--carbon);
+    background:var(--lima);border-radius:8px;padding:3px 10px;
+    display:inline-block;margin-bottom:14px;letter-spacing:1px;
+  }
+  .paso h3{font-size:17px;font-weight:800;margin-bottom:6px}
+  .paso p{font-size:14.5px;color:var(--gris)}
+
+  /* ===== PRECIO ===== */
+  .precio-card{
+    background:var(--lima);color:var(--carbon);border-radius:22px;
+    padding:56px 36px;text-align:center;margin-top:10px;
+  }
+  .precio-card .monto{font-family:'Anton',sans-serif;font-size:clamp(56px,9vw,92px);line-height:1}
+  .precio-card .por-mes{font-size:19px;font-weight:700;margin-top:6px}
+  .precio-list{
+    display:flex;justify-content:center;gap:10px 28px;flex-wrap:wrap;
+    margin-top:28px;font-weight:600;font-size:16px;
+  }
+  .precio-list span{display:inline-flex;align-items:center;gap:8px}
+  .precio-list svg{flex-shrink:0}
+
+  /* ===== TESTIMONIOS ===== */
+  .grid-testi{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:36px}
+  .chat{
+    background:var(--carbon-2);border:1px solid var(--linea);border-radius:var(--radius);
+    padding:22px;display:flex;flex-direction:column;gap:10px;
+  }
+  .chat .quien{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+  .chat .avatar{
+    width:38px;height:38px;border-radius:50%;background:var(--carbon-3);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;color:var(--lima);font-size:15px;flex-shrink:0;
+  }
+  .chat .nombre{font-weight:700;font-size:15px}
+  .chat .lugar{font-size:12.5px;color:var(--gris)}
+  .burbuja{
+    background:#1f3d2b;border-radius:12px 12px 12px 3px;
+    padding:12px 15px;font-size:14.5px;line-height:1.5;
+  }
+  .burbuja .hora{display:block;text-align:right;font-size:11px;color:var(--gris);margin-top:5px}
+  .testi-nota{margin-top:20px;font-size:13px;color:var(--gris);font-style:italic}
+
+  /* ===== VIDEO ===== */
+  .video-ph{
+    margin-top:36px;aspect-ratio:16/9;max-width:720px;
+    background:var(--carbon-2);border:1px solid var(--linea);border-radius:var(--radius);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+    cursor:pointer;transition:border-color .2s ease;
+  }
+  .video-ph:hover{border-color:var(--lima)}
+  .play{
+    width:74px;height:74px;border-radius:50%;background:var(--lima);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .play svg{margin-left:5px}
+  .video-ph span{color:var(--gris);font-size:14.5px;padding:0 30px;text-align:center}
+
+  /* ===== FAQ ===== */
+  .faq{margin-top:30px;max-width:720px}
+  details{
+    border:1px solid var(--linea);border-radius:var(--radius);
+    background:var(--carbon-2);margin-bottom:10px;overflow:hidden;
+  }
+  summary{
+    cursor:pointer;padding:19px 22px;font-weight:700;font-size:16.5px;
+    list-style:none;display:flex;justify-content:space-between;align-items:center;gap:14px;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary::after{
+    content:"+";font-family:'Anton',sans-serif;font-size:22px;color:var(--lima);
+    transition:transform .2s ease;flex-shrink:0;
+  }
+  details[open] summary::after{transform:rotate(45deg)}
+  details .resp{padding:0 22px 20px;color:var(--gris);font-size:15.5px}
+  details .resp strong{color:var(--blanco)}
+
+  /* ===== CIERRE ===== */
+  .cierre{
+    text-align:center;padding:100px 0;border-bottom:none;
+    background:
+      radial-gradient(ellipse 70% 80% at 50% 110%, rgba(200,245,66,.14), transparent 65%),
+      var(--carbon);
+  }
+  .cierre h2{font-size:clamp(32px,5.5vw,54px)}
+  .cierre p{color:var(--gris);font-size:19px;margin-top:10px}
+  .cierre .cta{font-size:20px;padding:22px 44px;margin-top:36px}
+
+  footer{
+    padding:34px 0;text-align:center;font-size:13px;color:var(--gris);
+    border-top:1px solid var(--linea);
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    html{scroll-behavior:auto}
+  }
+  @media (max-width:560px){
+    section{padding:58px 0}
+    .hero{padding:84px 0 72px}
+    .precio-card{padding:42px 24px}
+  }
+
+  /* ===== CARRUSELES DE TESTIMONIOS ===== */
+  .sec-testi{overflow:hidden}
+  .marquee{
+    overflow:hidden;margin-top:26px;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+  }
+  .marquee + .marquee{margin-top:16px}
+  .fila{display:flex;gap:16px;width:max-content;padding:4px 0;will-change:transform}
+  .fila .chat{width:305px;flex-shrink:0}
+  .fila.der{animation:desliza-der 210s linear infinite}
+  .fila.izq{animation:desliza-izq 230s linear infinite}
+  .fila:hover{animation-play-state:paused}
+  @keyframes desliza-der{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+  @keyframes desliza-izq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion:reduce){
+    .marquee{overflow-x:auto}
+    .fila.der,.fila.izq{animation:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="hero">
+  <div class="fondo" aria-hidden="true"></div>
+  <div class="velo" aria-hidden="true"></div>
+  <div class="wrap">
+    <span class="badge-vivo"><span class="dot"></span> Señal activa las 24 hs</span>
+    <h1>¿Seguís pagando <em>una fortuna</em> por el cable?</h1>
+    <p class="sub">Mirá <strong>cientos de canales</strong>, deportes, películas y series por solo <span class="precio-tag">$12.000 al mes</span>. Sin contratos. Activás por WhatsApp en minutos.</p>
+    <div class="cta-row">
+      <a class="cta" href="https://wa.me/5491178246112?text=Quiero%20adquirir%20el%20servicio" target="_blank" rel="noopener">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.1 4.49.71.3 1.27.49 1.7.63.72.23 1.37.2 1.88.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35zM12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.73.98 1-3.65-.24-.37a9.82 9.82 0 0 1-1.51-5.26c0-5.44 4.43-9.87 9.88-9.87a9.8 9.8 0 0 1 6.98 2.9 9.8 9.8 0 0 1 2.89 6.98c0 5.45-4.43 9.88-9.87 9.88zm8.4-18.28A11.8 11.8 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.87 11.87 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.16-3.49-8.4z"/></svg>
+        Quiero adquirir el servicio
+      </a>
+      <span class="cta-nota">Te respondemos al instante por WhatsApp</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============ QUÉ INCLUYE ============ -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">Qué incluye</span>
+    <h2>Todo el contenido, en un solo lugar</h2>
+    <p class="lead">Una grilla completa para toda la familia: desde el partido del finde hasta los dibujitos de los pibes.</p>
+    <div class="grid-canales">
+      <div class="canal destacada">
+        <div class="foto" style="background-image:url('img/pack-futbol.jpg')"></div>
+        <div class="info"><span class="nom">Pack Fútbol</span><span class="cat">Todos los partidos</span></div>
+      </div>
+      <div class="canal">
+        <div class="foto" style="background-image:url('img/canales-nacionales.jpg')"></div>
+        <div class="info"><span class="nom">Canales nacionales</span><span class="cat">Todos</span></div>
+      </div>
+      <div class="canal">
+        <div class="foto" style="background-image:url('img/internacionales.jpg')"></div>
+        <div class="info"><span class="nom">Internacionales</span><span class="cat">Señales del mundo</span></div>
+      </div>
+      <div class="canal">
+        <div class="foto" style="background-image:url('img/automovilismo.jpg')"></div>
+        <div class="info"><span class="nom">Automovilismo</span><span class="cat">Velocidad pura</span></div>
+      </div>
+      <div class="canal">
+        <div class="foto" style="background-image:url('img/deportes.jpg')"></div>
+        <div class="info"><span class="nom">Deportes</span><span class="cat">En vivo</span></div>
+      </div>
+      <div class="canal">
+        <div class="foto" style="background-image:url('img/peliculas.jpg')"></div>
+        <div class="info"><span class="nom">Películas</span><span class="cat">Estrenos y clásicos</span></div>
+      </div>
+      <div class="canal">
+        <div class="foto" style="background-image:url('img/series.jpg')"></div>
+        <div class="info"><span class="nom">Series</span><span class="cat">Maratón sin fin</span></div>
+      </div>
+      <div class="canal">
+        <div class="foto" style="background-image:url('img/dibujos-animados.jpg')"></div>
+        <div class="info"><span class="nom">Dibujos animados</span><span class="cat">Para los chicos</span></div>
+      </div>
+      <div class="canal">
+        <div class="foto" style="background-image:url('img/noticias.jpg')"></div>
+        <div class="info"><span class="nom">Noticias</span><span class="cat">24 horas</span></div>
+      </div>
+      <div class="canal">
+        <div class="foto" style="background-image:url('img/cultura.jpg')"></div>
+        <div class="info"><span class="nom">Cultura</span><span class="cat">Documentales y más</span></div>
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+<!-- ============ DÓNDE FUNCIONA ============ -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">Compatibilidad</span>
+    <h2>¿Dónde funciona?</h2>
+    <div class="grid-disp">
+      <div class="disp">
+        <span class="ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>
+        <h3>Smart TV</h3><p>Con Android TV. Instalás la app y listo.</p>
+      </div>
+      <div class="disp">
+        <span class="ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="9" width="18" height="8" rx="2"/><circle cx="8" cy="13" r="1"/><path d="M16 12.5v1M18 12.5v1M7 9l3-4M17 9l-3-4"/></svg></span>
+        <h3>TV Box</h3><p>Convertí cualquier tele en Smart TV.</p>
+      </div>
+      <div class="disp">
+        <span class="ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18.5h2"/></svg></span>
+        <h3>Celular Android</h3><p>Mirá donde estés, con WiFi o datos.</p>
+      </div>
+    </div>
+    <div class="aviso-box">¿Tu tele no tiene Android? No pasa nada: con un <strong>TV Box</strong> funciona perfecto.</div>
+  </div>
+</section>
+
+<!-- ============ 3 DISPOSITIVOS ============ -->
+<section>
+  <div class="wrap">
+    <div class="multi">
+      <div>
+        <span class="eyebrow">Multipantalla</span>
+        <span class="num">×3</span>
+        <h2>Un solo usuario, hasta 3 dispositivos</h2>
+        <p class="lead">Con una sola suscripción podés mirar desde hasta tres dispositivos <strong style="color:var(--blanco)">al mismo tiempo</strong>. La tele en el living, el celu en la pieza y la tablet de los pibes.</p>
+      </div>
+      <div class="foto">
+        <img src="img/living.jpg" alt="Televisor encendido en un living" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CÓMO FUNCIONA ============ -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">Activación express</span>
+    <h2>¿Cómo funciona?</h2>
+    <div class="pasos">
+      <div class="paso"><h3>Me escribís</h3><p>Un mensaje por WhatsApp y arrancamos.</p></div>
+      <div class="paso"><h3>Realizás el pago</h3><p>Transferencia simple, sin vueltas.</p></div>
+      <div class="paso"><h3>Recibís tu acceso</h3><p>Te envío tu usuario y contraseña.</p></div>
+      <div class="paso"><h3>Ya estás mirando</h3><p>En pocos minutos, todo funcionando.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRECIO ============ -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">Precio</span>
+    <div class="precio-card">
+      <div class="monto">$12.000</div>
+      <div class="por-mes">por mes</div>
+      <div class="precio-list">
+        <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Sin contratos</span>
+        <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Sin instalaciones complicadas</span>
+        <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Renovás cuando vos querés</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIOS ============ -->
+<section class="sec-testi">
+  <div class="wrap">
+    <span class="eyebrow">Clientes</span>
+    <h2>Lo que dicen los que ya se pasaron</h2>
+  </div>
+  <div class="marquee" aria-label="Testimonios de clientes">
+    <div class="fila der"><div class="chat"><div class="quien"><span class="avatar">M</span><div><div class="nombre">Marcelo</div><div class="lugar">Paraná, Entre Ríos</div></div></div><div class="burbuja">Una masa, en 10 minutos ya estaba mirando el partido. Chau cable 👋<span class="hora">21:14 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">S</span><div><div class="nombre">Sole</div><div class="lugar">Rosario, Santa Fe</div></div></div><div class="burbuja">Lo tengo en la tele y en el celu al mismo tiempo. Los chicos con los dibujitos y yo con las series 😄<span class="hora">18:02 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">D</span><div><div class="nombre">Damián</div><div class="lugar">CABA</div></div></div><div class="burbuja">Pensé que iba a ser un lío instalarlo pero me guiaron paso a paso. Se ve impecable 👌<span class="hora">20:47 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">R</span><div><div class="nombre">Rubén</div><div class="lugar">Córdoba</div></div></div><div class="burbuja">Me cansé de pagar una fortuna de cable. Esto anda de diez y pago la mitad<span class="hora">19:33 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">N</span><div><div class="nombre">Nacho</div><div class="lugar">La Plata</div></div></div><div class="burbuja">El pack fútbol es lo más, no me pierdo un partido ⚽<span class="hora">22:10 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">C</span><div><div class="nombre">Caro</div><div class="lugar">Mendoza</div></div></div><div class="burbuja">Lo activé un domingo a la noche y en 15 minutos ya estaba viendo una peli<span class="hora">23:05 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">F</span><div><div class="nombre">Fede</div><div class="lugar">Neuquén</div></div></div><div class="burbuja">Atienden al toque por WhatsApp, cero vueltas<span class="hora">14:21 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">L</span><div><div class="nombre">Lucía</div><div class="lugar">Santa Fe</div></div></div><div class="burbuja">Mi viejo lo usa en el TV Box y no tuvo drama, y eso que pelea con la tecnología jaja<span class="hora">17:48 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">G</span><div><div class="nombre">Gastón</div><div class="lugar">Salta</div></div></div><div class="burbuja">Renovás cuando querés, sin contrato. Eso me cerró<span class="hora">11:36 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">V</span><div><div class="nombre">Vero</div><div class="lugar">Corrientes</div></div></div><div class="burbuja">Los canales internacionales me salvaron, miro las novelas que acá no pasan<span class="hora">16:29 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">T</span><div><div class="nombre">Tato</div><div class="lugar">Posadas</div></div></div><div class="burbuja">Anda joya con el wifi de casa, nunca se corta<span class="hora">20:15 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">M</span><div><div class="nombre">Mica</div><div class="lugar">Mar del Plata</div></div></div><div class="burbuja">Lo puse en la tele del local y los clientes miran los partidos 🙌<span class="hora">13:42 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">B</span><div><div class="nombre">Beto</div><div class="lugar">Bahía Blanca</div></div></div><div class="burbuja">La instalación me la hicieron por videollamada, un capo el pibe<span class="hora">18:57 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">F</span><div><div class="nombre">Flor</div><div class="lugar">San Juan</div></div></div><div class="burbuja">Series y pelis para rato, no termino más jaja<span class="hora">21:33 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">E</span><div><div class="nombre">Emi</div><div class="lugar">Tucumán</div></div></div><div class="burbuja">Pagué, me mandaron el usuario y listo. Así de simple<span class="hora">10:18 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">C</span><div><div class="nombre">Ceci</div><div class="lugar">Resistencia</div></div></div><div class="burbuja">Los dibujitos las 24 hs, los enanos felices 😅<span class="hora">09:44 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">P</span><div><div class="nombre">Pipa</div><div class="lugar">Santa Rosa</div></div></div><div class="burbuja">Se ve mejor que el cable que tenía, posta<span class="hora">19:22 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">C</span><div><div class="nombre">Colo</div><div class="lugar">Río Cuarto</div></div></div><div class="burbuja">Un amigo me lo recomendó y ya somos como diez en el barrio<span class="hora">15:37 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">A</span><div><div class="nombre">Andrea</div><div class="lugar">Villa María</div></div></div><div class="burbuja">Me olvidé de la factura del cable, mejor imposible<span class="hora">12:53 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">S</span><div><div class="nombre">Seba</div><div class="lugar">Concordia</div></div></div><div class="burbuja">Funciona en el celu con datos, lo miro en el laburo 🤫<span class="hora">13:11 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">G</span><div><div class="nombre">Guada</div><div class="lugar">Gualeguaychú</div></div></div><div class="burbuja">Cero permanencia, probé un mes y me quedé<span class="hora">17:05 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">T</span><div><div class="nombre">Tincho</div><div class="lugar">Rafaela</div></div></div><div class="burbuja">El fútbol se ve espectacular, ni un tirón<span class="hora">22:41 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">R</span><div><div class="nombre">Romi</div><div class="lugar">Venado Tuerto</div></div></div><div class="burbuja">Respondieron un sábado a las 11 de la noche, eso vale oro<span class="hora">23:12 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">L</span><div><div class="nombre">Lucas</div><div class="lugar">San Luis</div></div></div><div class="burbuja">Con el TV Box quedó andando la tele vieja del quincho 👏<span class="hora">16:44 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">A</span><div><div class="nombre">Anto</div><div class="lugar">Ushuaia</div></div></div><div class="burbuja">Acá abajo el cable es carísimo, esto me salvó<span class="hora">20:29 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">C</span><div><div class="nombre">Chino</div><div class="lugar">Comodoro Rivadavia</div></div></div><div class="burbuja">Deportes todo el día, no pido más nada<span class="hora">18:16 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">P</span><div><div class="nombre">Pau</div><div class="lugar">Trelew</div></div></div><div class="burbuja">Las noticias en vivo y las pelis a la noche, uso completo<span class="hora">21:58 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">F</span><div><div class="nombre">Facu</div><div class="lugar">San Salvador de Jujuy</div></div></div><div class="burbuja">Lo renuevo por WhatsApp en dos minutos<span class="hora">11:07 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">D</span><div><div class="nombre">Dani</div><div class="lugar">Formosa</div></div></div><div class="burbuja">Tres dispositivos con una cuenta, hacemos pool con mi hermana jaja<span class="hora">14:52 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">M</span><div><div class="nombre">Marta</div><div class="lugar">Santiago del Estero</div></div></div><div class="burbuja">Mi nieto me lo instaló y ahora no me lo saca nadie 😄<span class="hora">10:31 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">K</span><div><div class="nombre">Kevin</div><div class="lugar">Catamarca</div></div></div><div class="burbuja">Probé otros y este es el que mejor anda lejos<span class="hora">19:46 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">B</span><div><div class="nombre">Belu</div><div class="lugar">La Rioja</div></div></div><div class="burbuja">El precio no me lo podía creer, y ya llevo tres meses<span class="hora">15:19 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">T</span><div><div class="nombre">Toto</div><div class="lugar">Tandil</div></div></div><div class="burbuja">Los clásicos los veo en la tele grande, un lujo 🔥<span class="hora">22:03 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">I</span><div><div class="nombre">Ivana</div><div class="lugar">Olavarría</div></div></div><div class="burbuja">Me ayudaron a configurarlo en dos teles distintas<span class="hora">16:08 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">R</span><div><div class="nombre">Rama</div><div class="lugar">Junín</div></div></div><div class="burbuja">Cambié el cable por esto y no vuelvo más<span class="hora">20:52 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">S</span><div><div class="nombre">Sol</div><div class="lugar">Pergamino</div></div></div><div class="burbuja">Las pelis de estreno están buenísimas<span class="hora">21:26 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">W</span><div><div class="nombre">Walter</div><div class="lugar">Zárate</div></div></div><div class="burbuja">Anda perfecto en el celu cuando viajo en tren<span class="hora">08:39 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">A</span><div><div class="nombre">Agus</div><div class="lugar">Campana</div></div></div><div class="burbuja">Un golazo el servicio, nunca se colgó<span class="hora">19:14 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">N</span><div><div class="nombre">Naty</div><div class="lugar">Quilmes</div></div></div><div class="burbuja">Atención de primera, te explican todo con paciencia<span class="hora">13:27 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">D</span><div><div class="nombre">Diego</div><div class="lugar">Lanús</div></div></div><div class="burbuja">Del pago a estar mirando pasaron 10 minutos, real<span class="hora">18:41 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">M</span><div><div class="nombre">Marcelo</div><div class="lugar">Paraná, Entre Ríos</div></div></div><div class="burbuja">Una masa, en 10 minutos ya estaba mirando el partido. Chau cable 👋<span class="hora">21:14 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">S</span><div><div class="nombre">Sole</div><div class="lugar">Rosario, Santa Fe</div></div></div><div class="burbuja">Lo tengo en la tele y en el celu al mismo tiempo. Los chicos con los dibujitos y yo con las series 😄<span class="hora">18:02 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">D</span><div><div class="nombre">Damián</div><div class="lugar">CABA</div></div></div><div class="burbuja">Pensé que iba a ser un lío instalarlo pero me guiaron paso a paso. Se ve impecable 👌<span class="hora">20:47 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">R</span><div><div class="nombre">Rubén</div><div class="lugar">Córdoba</div></div></div><div class="burbuja">Me cansé de pagar una fortuna de cable. Esto anda de diez y pago la mitad<span class="hora">19:33 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">N</span><div><div class="nombre">Nacho</div><div class="lugar">La Plata</div></div></div><div class="burbuja">El pack fútbol es lo más, no me pierdo un partido ⚽<span class="hora">22:10 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">C</span><div><div class="nombre">Caro</div><div class="lugar">Mendoza</div></div></div><div class="burbuja">Lo activé un domingo a la noche y en 15 minutos ya estaba viendo una peli<span class="hora">23:05 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">F</span><div><div class="nombre">Fede</div><div class="lugar">Neuquén</div></div></div><div class="burbuja">Atienden al toque por WhatsApp, cero vueltas<span class="hora">14:21 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">L</span><div><div class="nombre">Lucía</div><div class="lugar">Santa Fe</div></div></div><div class="burbuja">Mi viejo lo usa en el TV Box y no tuvo drama, y eso que pelea con la tecnología jaja<span class="hora">17:48 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">G</span><div><div class="nombre">Gastón</div><div class="lugar">Salta</div></div></div><div class="burbuja">Renovás cuando querés, sin contrato. Eso me cerró<span class="hora">11:36 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">V</span><div><div class="nombre">Vero</div><div class="lugar">Corrientes</div></div></div><div class="burbuja">Los canales internacionales me salvaron, miro las novelas que acá no pasan<span class="hora">16:29 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">T</span><div><div class="nombre">Tato</div><div class="lugar">Posadas</div></div></div><div class="burbuja">Anda joya con el wifi de casa, nunca se corta<span class="hora">20:15 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">M</span><div><div class="nombre">Mica</div><div class="lugar">Mar del Plata</div></div></div><div class="burbuja">Lo puse en la tele del local y los clientes miran los partidos 🙌<span class="hora">13:42 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">B</span><div><div class="nombre">Beto</div><div class="lugar">Bahía Blanca</div></div></div><div class="burbuja">La instalación me la hicieron por videollamada, un capo el pibe<span class="hora">18:57 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">F</span><div><div class="nombre">Flor</div><div class="lugar">San Juan</div></div></div><div class="burbuja">Series y pelis para rato, no termino más jaja<span class="hora">21:33 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">E</span><div><div class="nombre">Emi</div><div class="lugar">Tucumán</div></div></div><div class="burbuja">Pagué, me mandaron el usuario y listo. Así de simple<span class="hora">10:18 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">C</span><div><div class="nombre">Ceci</div><div class="lugar">Resistencia</div></div></div><div class="burbuja">Los dibujitos las 24 hs, los enanos felices 😅<span class="hora">09:44 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">P</span><div><div class="nombre">Pipa</div><div class="lugar">Santa Rosa</div></div></div><div class="burbuja">Se ve mejor que el cable que tenía, posta<span class="hora">19:22 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">C</span><div><div class="nombre">Colo</div><div class="lugar">Río Cuarto</div></div></div><div class="burbuja">Un amigo me lo recomendó y ya somos como diez en el barrio<span class="hora">15:37 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">A</span><div><div class="nombre">Andrea</div><div class="lugar">Villa María</div></div></div><div class="burbuja">Me olvidé de la factura del cable, mejor imposible<span class="hora">12:53 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">S</span><div><div class="nombre">Seba</div><div class="lugar">Concordia</div></div></div><div class="burbuja">Funciona en el celu con datos, lo miro en el laburo 🤫<span class="hora">13:11 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">G</span><div><div class="nombre">Guada</div><div class="lugar">Gualeguaychú</div></div></div><div class="burbuja">Cero permanencia, probé un mes y me quedé<span class="hora">17:05 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">T</span><div><div class="nombre">Tincho</div><div class="lugar">Rafaela</div></div></div><div class="burbuja">El fútbol se ve espectacular, ni un tirón<span class="hora">22:41 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">R</span><div><div class="nombre">Romi</div><div class="lugar">Venado Tuerto</div></div></div><div class="burbuja">Respondieron un sábado a las 11 de la noche, eso vale oro<span class="hora">23:12 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">L</span><div><div class="nombre">Lucas</div><div class="lugar">San Luis</div></div></div><div class="burbuja">Con el TV Box quedó andando la tele vieja del quincho 👏<span class="hora">16:44 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">A</span><div><div class="nombre">Anto</div><div class="lugar">Ushuaia</div></div></div><div class="burbuja">Acá abajo el cable es carísimo, esto me salvó<span class="hora">20:29 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">C</span><div><div class="nombre">Chino</div><div class="lugar">Comodoro Rivadavia</div></div></div><div class="burbuja">Deportes todo el día, no pido más nada<span class="hora">18:16 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">P</span><div><div class="nombre">Pau</div><div class="lugar">Trelew</div></div></div><div class="burbuja">Las noticias en vivo y las pelis a la noche, uso completo<span class="hora">21:58 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">F</span><div><div class="nombre">Facu</div><div class="lugar">San Salvador de Jujuy</div></div></div><div class="burbuja">Lo renuevo por WhatsApp en dos minutos<span class="hora">11:07 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">D</span><div><div class="nombre">Dani</div><div class="lugar">Formosa</div></div></div><div class="burbuja">Tres dispositivos con una cuenta, hacemos pool con mi hermana jaja<span class="hora">14:52 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">M</span><div><div class="nombre">Marta</div><div class="lugar">Santiago del Estero</div></div></div><div class="burbuja">Mi nieto me lo instaló y ahora no me lo saca nadie 😄<span class="hora">10:31 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">K</span><div><div class="nombre">Kevin</div><div class="lugar">Catamarca</div></div></div><div class="burbuja">Probé otros y este es el que mejor anda lejos<span class="hora">19:46 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">B</span><div><div class="nombre">Belu</div><div class="lugar">La Rioja</div></div></div><div class="burbuja">El precio no me lo podía creer, y ya llevo tres meses<span class="hora">15:19 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">T</span><div><div class="nombre">Toto</div><div class="lugar">Tandil</div></div></div><div class="burbuja">Los clásicos los veo en la tele grande, un lujo 🔥<span class="hora">22:03 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">I</span><div><div class="nombre">Ivana</div><div class="lugar">Olavarría</div></div></div><div class="burbuja">Me ayudaron a configurarlo en dos teles distintas<span class="hora">16:08 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">R</span><div><div class="nombre">Rama</div><div class="lugar">Junín</div></div></div><div class="burbuja">Cambié el cable por esto y no vuelvo más<span class="hora">20:52 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">S</span><div><div class="nombre">Sol</div><div class="lugar">Pergamino</div></div></div><div class="burbuja">Las pelis de estreno están buenísimas<span class="hora">21:26 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">W</span><div><div class="nombre">Walter</div><div class="lugar">Zárate</div></div></div><div class="burbuja">Anda perfecto en el celu cuando viajo en tren<span class="hora">08:39 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">A</span><div><div class="nombre">Agus</div><div class="lugar">Campana</div></div></div><div class="burbuja">Un golazo el servicio, nunca se colgó<span class="hora">19:14 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">N</span><div><div class="nombre">Naty</div><div class="lugar">Quilmes</div></div></div><div class="burbuja">Atención de primera, te explican todo con paciencia<span class="hora">13:27 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">D</span><div><div class="nombre">Diego</div><div class="lugar">Lanús</div></div></div><div class="burbuja">Del pago a estar mirando pasaron 10 minutos, real<span class="hora">18:41 ✓✓</span></div></div></div>
+  </div>
+  <div class="marquee">
+    <div class="fila izq"><div class="chat"><div class="quien"><span class="avatar">C</span><div><div class="nombre">Cintia</div><div class="lugar">Morón</div></div></div><div class="burbuja">Los canales de cocina son mi vicio jaja<span class="hora">12:16 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">M</span><div><div class="nombre">Maxi</div><div class="lugar">Pilar</div></div></div><div class="burbuja">Lo uso en la tablet de los pibes para los viajes 🚗<span class="hora">09:53 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">V</span><div><div class="nombre">Vale</div><div class="lugar">Escobar</div></div></div><div class="burbuja">Todo por WhatsApp, sin llamaditas ni turnos<span class="hora">15:48 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">N</span><div><div class="nombre">Nico</div><div class="lugar">Tigre</div></div></div><div class="burbuja">El partido de anoche se vio de lujo<span class="hora">23:34 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">A</span><div><div class="nombre">Andre</div><div class="lugar">Avellaneda</div></div></div><div class="burbuja">Me pasaron el acceso al instante de pagar<span class="hora">17:21 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">C</span><div><div class="nombre">Cachi</div><div class="lugar">Lomas de Zamora</div></div></div><div class="burbuja">La tele del taller ahora tiene todos los canales 💪<span class="hora">11:42 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">M</span><div><div class="nombre">Meli</div><div class="lugar">San Isidro</div></div></div><div class="burbuja">Series para maratonear todos los findes<span class="hora">21:09 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">G</span><div><div class="nombre">Gordo</div><div class="lugar">Moreno</div></div></div><div class="burbuja">Baratísimo para todo lo que trae<span class="hora">14:36 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">Y</span><div><div class="nombre">Yani</div><div class="lugar">Merlo</div></div></div><div class="burbuja">Mi mamá lo maneja sola y eso ya es mucho decir 😂<span class="hora">16:53 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">P</span><div><div class="nombre">Pablo</div><div class="lugar">Berazategui</div></div></div><div class="burbuja">Sin cables, sin antena, sin técnico. Un golazo<span class="hora">19:58 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">L</span><div><div class="nombre">Loli</div><div class="lugar">Florencio Varela</div></div></div><div class="burbuja">Los documentales están buenísimos, no sabía que venían<span class="hora">20:37 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">J</span><div><div class="nombre">Juanma</div><div class="lugar">San Miguel</div></div></div><div class="burbuja">Se banca los tres dispositivos a la vez sin trabarse<span class="hora">22:24 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">R</span><div><div class="nombre">Rocío</div><div class="lugar">José C. Paz</div></div></div><div class="burbuja">Lo probé de onda y terminé dando de baja el cable<span class="hora">13:59 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">T</span><div><div class="nombre">Tomi</div><div class="lugar">Luján</div></div></div><div class="burbuja">Automovilismo los domingos, ritual sagrado 🏁<span class="hora">12:44 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">G</span><div><div class="nombre">Grace</div><div class="lugar">Chivilcoy</div></div></div><div class="burbuja">Renové tres veces ya, siempre al toque<span class="hora">10:26 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">L</span><div><div class="nombre">León</div><div class="lugar">Azul</div></div></div><div class="burbuja">En el campo con wifi rural anda perfecto<span class="hora">17:39 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">C</span><div><div class="nombre">Cami</div><div class="lugar">Necochea</div></div></div><div class="burbuja">Las infantiles son un salvavidas los días de lluvia<span class="hora">15:02 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">B</span><div><div class="nombre">Bruno</div><div class="lugar">Balcarce</div></div></div><div class="burbuja">Calidad de imagen muy superior a lo que tenía<span class="hora">18:33 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">P</span><div><div class="nombre">Pato</div><div class="lugar">Villa Gesell</div></div></div><div class="burbuja">Lo puse en el depto que alquilo y los turistas chochos<span class="hora">21:47 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">A</span><div><div class="nombre">Ale</div><div class="lugar">Pinamar</div></div></div><div class="burbuja">Me atendieron un feriado, impecable<span class="hora">11:58 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">D</span><div><div class="nombre">Denu</div><div class="lugar">Chascomús</div></div></div><div class="burbuja">El precio del cable era un robo, esto es otra cosa<span class="hora">19:07 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">R</span><div><div class="nombre">Rulo</div><div class="lugar">San Nicolás</div></div></div><div class="burbuja">Todos los partidos, posta todos<span class="hora">22:52 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">F</span><div><div class="nombre">Flopi</div><div class="lugar">San Pedro</div></div></div><div class="burbuja">Fácil de usar, hasta en la tele vieja con el box<span class="hora">14:13 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">N</span><div><div class="nombre">Nahue</div><div class="lugar">Baradero</div></div></div><div class="burbuja">Lo comparto con mi vieja y mi hermano, sale dos mangos cada uno<span class="hora">16:37 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">A</span><div><div class="nombre">Ampi</div><div class="lugar">Victoria, Entre Ríos</div></div></div><div class="burbuja">Miro las noticias a la mañana y novelas a la tarde 😄<span class="hora">09:21 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">C</span><div><div class="nombre">Charly</div><div class="lugar">Crespo</div></div></div><div class="burbuja">Cero corte en todo el mes, ni un buffering<span class="hora">20:04 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">J</span><div><div class="nombre">Juli</div><div class="lugar">Diamante</div></div></div><div class="burbuja">El proceso de alta es rapidísimo<span class="hora">13:48 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">M</span><div><div class="nombre">Mati</div><div class="lugar">Villaguay</div></div></div><div class="burbuja">Me lo recomendó un compañero del laburo y ya recomendé a tres más<span class="hora">17:56 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">S</span><div><div class="nombre">Sabri</div><div class="lugar">Chajarí</div></div></div><div class="burbuja">Pelis nuevas todas las semanas 🍿<span class="hora">21:41 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">T</span><div><div class="nombre">Tuti</div><div class="lugar">Federación</div></div></div><div class="burbuja">Lo miro desde el celu en las termas jaja<span class="hora">12:29 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">E</span><div><div class="nombre">Ezequiel</div><div class="lugar">Colón, Entre Ríos</div></div></div><div class="burbuja">Buen precio, buena imagen, buena atención. Qué más<span class="hora">18:08 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">V</span><div><div class="nombre">Vicky</div><div class="lugar">San José</div></div></div><div class="burbuja">Los canales culturales son un plus que no esperaba<span class="hora">15:56 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">F</span><div><div class="nombre">Fabri</div><div class="lugar">Nogoyá</div></div></div><div class="burbuja">Andaba desconfiado y me sorprendió para bien<span class="hora">19:51 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">C</span><div><div class="nombre">Cynthi</div><div class="lugar">Concepción del Uruguay</div></div></div><div class="burbuja">Mis viejos, mi tele y mi celu: una sola cuenta<span class="hora">10:47 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">L</span><div><div class="nombre">Lauti</div><div class="lugar">Gualeguay</div></div></div><div class="burbuja">El básquet y el tenis también, no solo fútbol 🎾<span class="hora">22:18 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">M</span><div><div class="nombre">Moni</div><div class="lugar">Federal</div></div></div><div class="burbuja">Me explicaron paso a paso con capturas, re claros<span class="hora">14:04 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">G</span><div><div class="nombre">Gonza</div><div class="lugar">La Paz, Entre Ríos</div></div></div><div class="burbuja">Volví a mirar tele después de años, está buenísimo<span class="hora">20:43 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">A</span><div><div class="nombre">Ailu</div><div class="lugar">Hernandarias</div></div></div><div class="burbuja">Series, pelis y dibujitos: la familia entera lo usa<span class="hora">16:15 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">T</span><div><div class="nombre">Turco</div><div class="lugar">Bovril</div></div></div><div class="burbuja">Ni comparación con lo que pagaba antes<span class="hora">11:24 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">E</span><div><div class="nombre">Estela</div><div class="lugar">Cerrito</div></div></div><div class="burbuja">Lo renuevo cada mes sin pensarlo, funciona siempre<span class="hora">09:37 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">C</span><div><div class="nombre">Cintia</div><div class="lugar">Morón</div></div></div><div class="burbuja">Los canales de cocina son mi vicio jaja<span class="hora">12:16 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">M</span><div><div class="nombre">Maxi</div><div class="lugar">Pilar</div></div></div><div class="burbuja">Lo uso en la tablet de los pibes para los viajes 🚗<span class="hora">09:53 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">V</span><div><div class="nombre">Vale</div><div class="lugar">Escobar</div></div></div><div class="burbuja">Todo por WhatsApp, sin llamaditas ni turnos<span class="hora">15:48 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">N</span><div><div class="nombre">Nico</div><div class="lugar">Tigre</div></div></div><div class="burbuja">El partido de anoche se vio de lujo<span class="hora">23:34 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">A</span><div><div class="nombre">Andre</div><div class="lugar">Avellaneda</div></div></div><div class="burbuja">Me pasaron el acceso al instante de pagar<span class="hora">17:21 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">C</span><div><div class="nombre">Cachi</div><div class="lugar">Lomas de Zamora</div></div></div><div class="burbuja">La tele del taller ahora tiene todos los canales 💪<span class="hora">11:42 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">M</span><div><div class="nombre">Meli</div><div class="lugar">San Isidro</div></div></div><div class="burbuja">Series para maratonear todos los findes<span class="hora">21:09 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">G</span><div><div class="nombre">Gordo</div><div class="lugar">Moreno</div></div></div><div class="burbuja">Baratísimo para todo lo que trae<span class="hora">14:36 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">Y</span><div><div class="nombre">Yani</div><div class="lugar">Merlo</div></div></div><div class="burbuja">Mi mamá lo maneja sola y eso ya es mucho decir 😂<span class="hora">16:53 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">P</span><div><div class="nombre">Pablo</div><div class="lugar">Berazategui</div></div></div><div class="burbuja">Sin cables, sin antena, sin técnico. Un golazo<span class="hora">19:58 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">L</span><div><div class="nombre">Loli</div><div class="lugar">Florencio Varela</div></div></div><div class="burbuja">Los documentales están buenísimos, no sabía que venían<span class="hora">20:37 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">J</span><div><div class="nombre">Juanma</div><div class="lugar">San Miguel</div></div></div><div class="burbuja">Se banca los tres dispositivos a la vez sin trabarse<span class="hora">22:24 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">R</span><div><div class="nombre">Rocío</div><div class="lugar">José C. Paz</div></div></div><div class="burbuja">Lo probé de onda y terminé dando de baja el cable<span class="hora">13:59 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">T</span><div><div class="nombre">Tomi</div><div class="lugar">Luján</div></div></div><div class="burbuja">Automovilismo los domingos, ritual sagrado 🏁<span class="hora">12:44 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">G</span><div><div class="nombre">Grace</div><div class="lugar">Chivilcoy</div></div></div><div class="burbuja">Renové tres veces ya, siempre al toque<span class="hora">10:26 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">L</span><div><div class="nombre">León</div><div class="lugar">Azul</div></div></div><div class="burbuja">En el campo con wifi rural anda perfecto<span class="hora">17:39 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">C</span><div><div class="nombre">Cami</div><div class="lugar">Necochea</div></div></div><div class="burbuja">Las infantiles son un salvavidas los días de lluvia<span class="hora">15:02 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">B</span><div><div class="nombre">Bruno</div><div class="lugar">Balcarce</div></div></div><div class="burbuja">Calidad de imagen muy superior a lo que tenía<span class="hora">18:33 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">P</span><div><div class="nombre">Pato</div><div class="lugar">Villa Gesell</div></div></div><div class="burbuja">Lo puse en el depto que alquilo y los turistas chochos<span class="hora">21:47 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">A</span><div><div class="nombre">Ale</div><div class="lugar">Pinamar</div></div></div><div class="burbuja">Me atendieron un feriado, impecable<span class="hora">11:58 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">D</span><div><div class="nombre">Denu</div><div class="lugar">Chascomús</div></div></div><div class="burbuja">El precio del cable era un robo, esto es otra cosa<span class="hora">19:07 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">R</span><div><div class="nombre">Rulo</div><div class="lugar">San Nicolás</div></div></div><div class="burbuja">Todos los partidos, posta todos<span class="hora">22:52 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">F</span><div><div class="nombre">Flopi</div><div class="lugar">San Pedro</div></div></div><div class="burbuja">Fácil de usar, hasta en la tele vieja con el box<span class="hora">14:13 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">N</span><div><div class="nombre">Nahue</div><div class="lugar">Baradero</div></div></div><div class="burbuja">Lo comparto con mi vieja y mi hermano, sale dos mangos cada uno<span class="hora">16:37 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">A</span><div><div class="nombre">Ampi</div><div class="lugar">Victoria, Entre Ríos</div></div></div><div class="burbuja">Miro las noticias a la mañana y novelas a la tarde 😄<span class="hora">09:21 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">C</span><div><div class="nombre">Charly</div><div class="lugar">Crespo</div></div></div><div class="burbuja">Cero corte en todo el mes, ni un buffering<span class="hora">20:04 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">J</span><div><div class="nombre">Juli</div><div class="lugar">Diamante</div></div></div><div class="burbuja">El proceso de alta es rapidísimo<span class="hora">13:48 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">M</span><div><div class="nombre">Mati</div><div class="lugar">Villaguay</div></div></div><div class="burbuja">Me lo recomendó un compañero del laburo y ya recomendé a tres más<span class="hora">17:56 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">S</span><div><div class="nombre">Sabri</div><div class="lugar">Chajarí</div></div></div><div class="burbuja">Pelis nuevas todas las semanas 🍿<span class="hora">21:41 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">T</span><div><div class="nombre">Tuti</div><div class="lugar">Federación</div></div></div><div class="burbuja">Lo miro desde el celu en las termas jaja<span class="hora">12:29 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">E</span><div><div class="nombre">Ezequiel</div><div class="lugar">Colón, Entre Ríos</div></div></div><div class="burbuja">Buen precio, buena imagen, buena atención. Qué más<span class="hora">18:08 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">V</span><div><div class="nombre">Vicky</div><div class="lugar">San José</div></div></div><div class="burbuja">Los canales culturales son un plus que no esperaba<span class="hora">15:56 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">F</span><div><div class="nombre">Fabri</div><div class="lugar">Nogoyá</div></div></div><div class="burbuja">Andaba desconfiado y me sorprendió para bien<span class="hora">19:51 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">C</span><div><div class="nombre">Cynthi</div><div class="lugar">Concepción del Uruguay</div></div></div><div class="burbuja">Mis viejos, mi tele y mi celu: una sola cuenta<span class="hora">10:47 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">L</span><div><div class="nombre">Lauti</div><div class="lugar">Gualeguay</div></div></div><div class="burbuja">El básquet y el tenis también, no solo fútbol 🎾<span class="hora">22:18 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">M</span><div><div class="nombre">Moni</div><div class="lugar">Federal</div></div></div><div class="burbuja">Me explicaron paso a paso con capturas, re claros<span class="hora">14:04 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">G</span><div><div class="nombre">Gonza</div><div class="lugar">La Paz, Entre Ríos</div></div></div><div class="burbuja">Volví a mirar tele después de años, está buenísimo<span class="hora">20:43 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">A</span><div><div class="nombre">Ailu</div><div class="lugar">Hernandarias</div></div></div><div class="burbuja">Series, pelis y dibujitos: la familia entera lo usa<span class="hora">16:15 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">T</span><div><div class="nombre">Turco</div><div class="lugar">Bovril</div></div></div><div class="burbuja">Ni comparación con lo que pagaba antes<span class="hora">11:24 ✓✓</span></div></div><div class="chat"><div class="quien"><span class="avatar">E</span><div><div class="nombre">Estela</div><div class="lugar">Cerrito</div></div></div><div class="burbuja">Lo renuevo cada mes sin pensarlo, funciona siempre<span class="hora">09:37 ✓✓</span></div></div></div>
+  </div>
+  
+</section>
+
+
+<!-- ============ FAQ ============ -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">Preguntas frecuentes</span>
+    <h2>Lo que todos preguntan</h2>
+    <div class="faq">
+      <details>
+        <summary>¿Tengo permanencia?</summary>
+        <div class="resp"><strong>No.</strong> Renovás únicamente cuando quieras. Sin ataduras.</div>
+      </details>
+      <details>
+        <summary>¿Cómo renuevo?</summary>
+        <div class="resp">Me transferís nuevamente y activo otros <strong>30 días</strong>. Así de simple.</div>
+      </details>
+      <details>
+        <summary>¿La instalación es difícil?</summary>
+        <div class="resp"><strong>No.</strong> Te ayudo paso a paso por WhatsApp hasta que quede funcionando.</div>
+      </details>
+      <details>
+        <summary>¿Puedo usarlo en varios dispositivos?</summary>
+        <div class="resp"><strong>Sí.</strong> Hasta tres dispositivos al mismo tiempo con una sola suscripción.</div>
+      </details>
+      <details>
+        <summary>¿Qué pasa si mi tele no tiene Android?</summary>
+        <div class="resp">Podés usar un <strong>TV Box</strong>: se conecta a cualquier tele y la convierte en Smart TV.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CIERRE ============ -->
+<section class="cierre">
+  <div class="wrap">
+    <h2>¿Listo para dejar de <span style="color:var(--lima)">pagar de más</span>?</h2>
+    <p>Empezá hoy mismo. En minutos estás mirando.</p>
+    <a class="cta" href="https://wa.me/5491178246112?text=Quiero%20adquirir%20el%20servicio" target="_blank" rel="noopener">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.1 4.49.71.3 1.27.49 1.7.63.72.23 1.37.2 1.88.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35zM12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.73.98 1-3.65-.24-.37a9.82 9.82 0 0 1-1.51-5.26c0-5.44 4.43-9.87 9.88-9.87a9.8 9.8 0 0 1 6.98 2.9 9.8 9.8 0 0 1 2.89 6.98c0 5.45-4.43 9.88-9.87 9.88zm8.4-18.28A11.8 11.8 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.87 11.87 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.16-3.49-8.4z"/></svg>
+      Quiero adquirir el servicio hoy
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Modo Mundial TV </div>
+</footer>
+
+<!-- ============ CTA FIJO ============ -->
+<div class="cta-fijo" id="ctaFijo">
+  <a class="cta" href="https://wa.me/5491178246112?text=Quiero%20adquirir%20el%20servicio" target="_blank" rel="noopener">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.1 4.49.71.3 1.27.49 1.7.63.72.23 1.37.2 1.88.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35zM12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.73.98 1-3.65-.24-.37a9.82 9.82 0 0 1-1.51-5.26c0-5.44 4.43-9.87 9.88-9.87a9.8 9.8 0 0 1 6.98 2.9 9.8 9.8 0 0 1 2.89 6.98c0 5.45-4.43 9.88-9.87 9.88zm8.4-18.28A11.8 11.8 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.87 11.87 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.16-3.49-8.4z"/></svg>
+    Quiero adquirir el servicio
+  </a>
+</div>
+
+<script>
+  // El botón fijo aparece cuando el hero (que ya tiene su propio botón) sale de pantalla
+  var fijo = document.getElementById('ctaFijo');
+  var hero = document.getElementById('hero');
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function(entries){
+      fijo.classList.toggle('visible', !entries[0].isIntersecting);
+    }, {threshold: 0.15}).observe(hero);
+  } else {
+    fijo.classList.add('visible');
+  }
+</script>
+
+</body>
+</html>
