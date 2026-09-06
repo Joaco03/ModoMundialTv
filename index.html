@@ -595,5 +595,18 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
   }
 </script>
 
+<!-- TikTok - Evento Contact al tocar WhatsApp -->
+<script>
+  document.addEventListener('click', function(e){
+    var link = e.target.closest('a[href*="wa.me"], a[href*="api.whatsapp.com"], a[href*="whatsapp://"]');
+    if(link && window.ttq){
+      ttq.track('Contact', {
+        content_type: 'lead',
+        content_name: 'WhatsApp - Contratar servicio'
+      });
+    }
+  }, true);
+</script>
+
 </body>
 </html>
