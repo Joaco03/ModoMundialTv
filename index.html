@@ -609,26 +609,5 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
   }, true);
 </script>
 
-<!-- WhatsApp - Abrir la app directo (saltear pagina intermedia) con fallback a wa.me -->
-<script>
-  document.addEventListener('click', function(e){
-    var link = e.target.closest('a[href*="wa.me"], a[href*="api.whatsapp.com"]');
-    if(!link) return;
-    var esMovil = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-    if(!esMovil) return; // en escritorio dejamos wa.me normal
-    var m = link.href.match(/(?:wa\.me\/|phone=)(\d+)/);
-    var tel = m ? m[1] : '';
-    var t = link.href.match(/[?&]text=([^&]*)/);
-    var texto = t ? t[1] : '';
-    if(!tel) return;
-    e.preventDefault();
-    var deep = 'whatsapp://send?phone=' + tel + (texto ? '&text=' + texto : '');
-    var fallback = link.href;
-    var timer = setTimeout(function(){ window.location.href = fallback; }, 1500);
-    window.addEventListener('pagehide', function(){ clearTimeout(timer); }, { once: true });
-    window.location.href = deep;
-  });
-</script>
-
 </body>
 </html>
