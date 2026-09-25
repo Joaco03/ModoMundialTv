@@ -1,0 +1,11 @@
+# La pagina HTML se sirve SIEMPRE fresca (sin cache) para que los cambios
+# (numero de WhatsApp, textos, etc.) se vean al instante y nadie quede
+# viendo una version vieja desde el navegador de TikTok/Instagram.
+/
+  Cache-Control: public, max-age=0, must-revalidate
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Las imagenes si se cachean (una semana) para que la pagina cargue rapido.
+/img/*
+  Cache-Control: public, max-age=604800
