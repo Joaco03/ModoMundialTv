@@ -9,3 +9,9 @@
 # Las imagenes si se cachean (una semana) para que la pagina cargue rapido.
 /img/*
   Cache-Control: public, max-age=604800
+
+# Segunda landing (campana TikTok 2) - tambien siempre fresca.
+/2/
+  Cache-Control: public, max-age=0, must-revalidate
+/2/index.html
+  Cache-Control: public, max-age=0, must-revalidate
