@@ -15,3 +15,9 @@
   Cache-Control: public, max-age=0, must-revalidate
 /2/index.html
   Cache-Control: public, max-age=0, must-revalidate
+
+# Tercera landing (campana Google/YouTube) - tambien siempre fresca.
+/3/
+  Cache-Control: public, max-age=0, must-revalidate
+/3/index.html
+  Cache-Control: public, max-age=0, must-revalidate
