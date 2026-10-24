@@ -619,5 +619,19 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
   }, true);
 </script>
 
+<!-- Google Ads - Conversion "Contacto" al tocar WhatsApp -->
+<script>
+  document.addEventListener('click', function(e){
+    var link = e.target.closest('a[href*="wa.me"], a[href*="api.whatsapp.com"], a[href*="whatsapp://"]');
+    if(link && typeof gtag === 'function'){
+      gtag('event', 'conversion', {
+        'send_to': 'AW-18529179005/0ROWCKqn6qQdEP2qs4NF',
+        'value': 1.0,
+        'currency': 'ARS'
+      });
+    }
+  }, true);
+</script>
+
 </body>
 </html>
