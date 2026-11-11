@@ -21,3 +21,9 @@
   Cache-Control: public, max-age=0, must-revalidate
 /3/index.html
   Cache-Control: public, max-age=0, must-revalidate
+
+# Cuarta landing (campana TikTok, linea 3187) - tambien siempre fresca.
+/4/
+  Cache-Control: public, max-age=0, must-revalidate
+/4/index.html
+  Cache-Control: public, max-age=0, must-revalidate
